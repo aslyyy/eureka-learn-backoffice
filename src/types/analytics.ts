@@ -1,39 +1,4 @@
-import { Correction, Subject, User } from "./entities";
 
-
-export type StudentStats = {
-    totalSubmissions: number;
-    correctedSubmissions: number;
-    pendingSubmissions: number;
-    averageScore: number;
-    submissionsBySubject: {
-        subjectId: number;
-        _count: number;
-    }[];
-    recentCorrections: (Correction & {
-        submission: {
-            subject: Subject;
-        };
-    })[];
-};
-
-export type ProfessorStats = {
-    totalSubjects: number;
-    totalStudents: number;
-    totalStudents2?: number;
-    submissionsToCorrect: number;
-    correctionsByType: {
-        evaluationType: string;
-        _count: number;
-    }[];
-    recentSubmissions: {
-        id: number;
-        student: User;
-        subject: Subject;
-        submittedAt: Date;
-        fileUrl: string;
-    }[];
-};
 
 export type AdminStats = {
     userStats: {
@@ -80,5 +45,5 @@ export type AdminStats = {
 };
 
 export interface DashboardData {
-    stats: StudentStats | ProfessorStats | AdminStats;
+    stats: AdminStats;
 }

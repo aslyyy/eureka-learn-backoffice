@@ -11,30 +11,7 @@ export type CreateUserDto = {
 
 export type UpdateUserDto = Partial<CreateUserDto>;
 
-export type CreateSubjectDto = {
-    title: string;
-    description?: string;
-    fileUrl: string;
-    startDate: Date;
-    endDate: Date;
-    teacherId: number;
-}
 
-export type UpdateSubjectDto = Partial<CreateSubjectDto>;
-
-export type CreateSubmissionDto = {
-    fileUrl: string;
-    studentId: number;
-    subjectId: number;
-}
-
-export type CreateCorrectionDto = {
-    score?: number;
-    notes?: string;
-    submissionId: number;
-}
-
-export type UpdateCorrectionDto = Partial<Omit<CreateCorrectionDto, 'submissionId'>>;
 
 export type CreateClassroomDto = {
     name: string;

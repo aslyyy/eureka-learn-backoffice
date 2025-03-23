@@ -20,7 +20,6 @@ import {
   MoreHorizontal,
   Pencil,
   Trash2,
-  GraduationCap,
   Book
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
