@@ -1,0 +1,15 @@
+{
+  "buildCommand": "next build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_VERCEL_ENV": "production"
+  },
+  "build": {
+    "env": {
+      "NEXT_DISABLE_PRERENDER": "true",
+      "NEXT_LINT": "false"
+    }
+  }
+}
