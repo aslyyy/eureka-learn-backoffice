@@ -20,6 +20,7 @@ export type StudentStats = {
 export type ProfessorStats = {
     totalSubjects: number;
     totalStudents: number;
+    totalStudents2?: number;
     submissionsToCorrect: number;
     correctionsByType: {
         evaluationType: string;
