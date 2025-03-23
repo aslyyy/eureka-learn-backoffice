@@ -38,6 +38,7 @@ import { Role, User as Student } from "@/types";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { StudentSheet } from "./student-drawer";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
+import { ExcelImport } from "@/components/excel-import";
 
 export default function StudentsPage() {
   const [params, setParams] = useState<ListParams>({
@@ -215,7 +216,7 @@ export default function StudentsPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center space-x-4 mb-6">
+            <div className="flex items-center justify-between mb-6">
               <div className="relative flex-1 max-w-sm">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -231,6 +232,11 @@ export default function StudentsPage() {
                   className="pl-10"
                 />
               </div>
+              <ExcelImport
+                templateUrl="/api/templates/students"
+                role="STUDENT"
+                onSuccess={refetch}
+              />
             </div>
 
             <DataTable
@@ -249,6 +255,16 @@ export default function StudentsPage() {
           onSuccess={refetch}
         />
 
+        <StudentSheet
+          student={selectedStudent}
+          isOpen={isDrawerOpen}
+          onClose={() => {
+            setIsDrawerOpen(false);
+            setSelectedStudent(null);
+          }}
+          onEdit={handleEdit}
+        />
+
         <AlertDialog
           isOpen={alertDialogOpen}
           onClose={() => setAlertDialogOpen(false)}
@@ -257,22 +273,6 @@ export default function StudentsPage() {
           onConfirm={handleDeleteConfirm}
           confirmText="Supprimer"
           cancelText="Annuler"
-        />
-
-        <StudentSheet
-          student={selectedStudent}
-          isOpen={isDrawerOpen}
-          onClose={() => {
-            setIsDrawerOpen(false);
-            setSelectedStudent(null);
-          }}
-          onEdit={(student) => {
-            handleEdit(student, {
-              stopPropagation: () => {},
-              preventDefault: () => {}
-            } as React.MouseEvent);
-            setIsDrawerOpen(false);
-          }}
         />
       </div>
     </ContentLayout>

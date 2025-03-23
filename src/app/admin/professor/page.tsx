@@ -34,6 +34,7 @@ import { User, Role, Classroom } from "@/types/entities";
 import { useDeleteResource, useGetList } from "@/providers/dataProvider";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 import { DataTable } from "@/components/ui/data-table/data-table";
+import { ExcelImport } from "@/components/excel-import";
 
 export default function ProfessorsPage() {
   const [params, setParams] = useState({
@@ -202,7 +203,7 @@ export default function ProfessorsPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center space-x-4 mb-6">
+            <div className="flex items-center justify-between mb-6">
               <div className="relative flex-1 max-w-sm">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -214,6 +215,11 @@ export default function ProfessorsPage() {
                   className="pl-10"
                 />
               </div>
+              <ExcelImport
+                templateUrl="/api/templates/professors"
+                role="PROFESSOR"
+                onSuccess={refetch}
+              />
             </div>
 
             <DataTable
