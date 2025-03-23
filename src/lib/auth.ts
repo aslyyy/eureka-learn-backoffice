@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
                 }
 
                 try {
-                    const response = await api.post("/auth/login", {
+                    const response = await api.post("/auth/admin/login", {
                         email: credentials.email,
                         password: credentials.password,
                     });
