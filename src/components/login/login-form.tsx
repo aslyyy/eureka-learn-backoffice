@@ -507,9 +507,7 @@ export function LoginForm() {
             className="mt-8 flex items-center gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700"
           >
             <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-sm text-slate-800 dark:text-white">
-              Système opérationnel • v2.5.0
-            </span>
+            
           </motion.div>
         </div>
       </div>
