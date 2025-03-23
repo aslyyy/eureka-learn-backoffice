@@ -8,11 +8,22 @@ export async function middleware(request: NextRequest) {
     const token = await getToken({ req: request });
 
 
+    console.log(token);
+
+
     const protectedRoutes = ['/dashboard', '/profile', '/admin'];
     const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
 
     const authRoutes = ['/login'];
     const isAuthRoute = authRoutes.includes(pathname);
+
+    if (pathname === '/') {
+        if (token) {
+            return NextResponse.redirect(new URL('/dashboard', request.url));
+        } else {
+            return NextResponse.redirect(new URL('/login', request.url));
+        }
+    }
 
     if (isProtectedRoute && !token) {
         return NextResponse.redirect(new URL('/login', request.url));
