@@ -123,7 +123,7 @@ export function LoginForm() {
             <Lightbulb className="h-12 w-12 text-blue-600 relative z-10" />
           </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Eureka Learn
+            Eureka Learn Backoffice
           </h1>
         </motion.div>
 
