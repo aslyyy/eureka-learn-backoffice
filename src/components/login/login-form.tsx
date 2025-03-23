@@ -506,7 +506,7 @@ export function LoginForm() {
             transition={{ delay: 1.2, duration: 0.8 }}
             className="mt-8 flex items-center gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700"
           >
-            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+
             
           </motion.div>
         </div>
