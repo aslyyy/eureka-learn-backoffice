@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -167,27 +168,30 @@ export function LoginForm() {
     setError("");
 
     try {
-      if (formData.email.includes("admin") && formData.password.length >= 6) {
-        setTimeout(() => {
-          setIsSuccess(true);
-          toast.success("Connexion réussie", {
-            description: "Redirection vers le tableau de bord..."
-          });
-          setTimeout(() => {
-            router.push("/admin/dashboard");
-          }, 1500);
-        }, 1000);
+      const result = await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+        redirect: false
+      });
+
+      if (result?.error) {
+        setError("Identifiants invalides");
+        toast.error("Échec de la connexion", {
+          description: "Vérifiez vos identifiants"
+        });
       } else {
-        setTimeout(() => {
-          setError("Identifiants invalides");
-          toast.error("Échec de la connexion", {
-            description: "Vérifiez vos identifiants"
-          });
-          setIsLoading(false);
-        }, 1000);
+        toast.success("Connexion réussie", {
+          description: "Redirection vers le tableau de bord..."
+        });
+
+        router.push("/dashboard");
       }
     } catch (error) {
-      setError("Une erreur est survenue");
+      console.error("Erreur de connexion:", error);
+      toast.error("Erreur de connexion", {
+        description: "Une erreur est survenue lors de la connexion"
+      });
+    } finally {
       setIsLoading(false);
     }
   };
@@ -505,10 +509,7 @@ export function LoginForm() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
             className="mt-8 flex items-center gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700"
-          >
-
-            
-          </motion.div>
+          ></motion.div>
         </div>
       </div>
     </div>
